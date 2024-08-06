@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PURE DOM TODO</title>
+    <link rel="stylesheet" href="./style.css" />
+    <!-- JavaScript goes here -->
+    <script>
+      // Initialize an empty string to hold the todos
+      let todos = [];
+
+      const todoBtn = () => {
+        console.log("Btn clicked");
+
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+
+        console.log(title + " " + description);
+
+        // Create a new todo item and add it to the todos array
+        const todoItem = `
+          <div class="todo-item">
+            <h3>Title: ${title}</h3>
+            <p>Description: ${description}</p>
+            <button class="done-btn" onclick="toggleDone(this)">Done</button>
+          </div>
+        `;
+
+        // Add the new todo item to the todos array and update the output box
+        todos.push(todoItem);
+        // call update output box for rendering the todo on website
+        updateOutputBox();
+      };
+
+      const updateOutputBox = () => {
+        const outputBox = document.getElementById("output-box");
+        outputBox.innerHTML = todos.join("");
+      };
+
+      const toggleDone = (button) => {
+        const todoItem = button.parentElement;
+        button.classList.toggle("done");
+        todoItem.style.textDecoration = button.classList.contains("done")
+          ? "line-through"
+          : "none";
+      };
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Title goes here -->
+      <div>
+        <h2 class="title">Pure Dom To-do</h2>
+      </div>
+
+      <!-- Input form -->
+      <div class="input-div">
+        <input
+          class="input-form"
+          id="title"
+          type="text"
+          placeholder="Enter todo title"
+        />
+        <input
+          class="input-form"
+          id="description"
+          type="text"
+          placeholder="Enter todo description"
+        />
+
+        <!-- Submit button here -->
+        <div class="btn-div">
+          <button class="btn" type="button" onclick="todoBtn()">
+            Add Todo
+          </button>
+        </div>
+      </div>
+
+      <!-- Output box here -->
+      <div id="output-box"></div>
+    </div>
+  </body>
+</html>
